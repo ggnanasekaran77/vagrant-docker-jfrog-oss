@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cicd-jfrog
+  namespace: new-jenkins
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cicd-jfrog
+      containers:
+        - name: cicd-jfrog
+          image: docker.bintray.io/jfrog/artifactory-cpp-ce
+          ports:
+            - containerPort: 8081
+          volumeMounts:
+            - mountPath: /var/opt
+              name: cicd-jfrog
+          resources:
+            limits:
+              cpu: 2
+              memory: 4Gi
+            requests:
+              cpu: 500m
+              memory: 1Gi
+      volumes:
+        - name: cicd-jfrog
+          gcePersistentDisk:
+            pdName: cicd-jfrog-artifactory
+            fsType: ext4
