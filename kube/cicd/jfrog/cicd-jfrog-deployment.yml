@@ -9,9 +9,10 @@ spec:
     metadata:
       labels:
         app: cicd-jfrog
+    spec:
       containers:
         - name: cicd-jfrog
-          image: docker.bintray.io/jfrog/artifactory-cpp-ce
+          image: docker.bintray.io/jfrog/artifactory-pro
           ports:
             - containerPort: 8081
           volumeMounts:
@@ -20,9 +21,9 @@ spec:
           resources:
             limits:
               cpu: 2
-              memory: 4Gi
+              memory: 3Gi
             requests:
-              cpu: 500m
+              cpu: 1
               memory: 1Gi
       volumes:
         - name: cicd-jfrog
